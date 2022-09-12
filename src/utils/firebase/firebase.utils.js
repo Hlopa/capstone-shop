@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, signInWithPopup, GoogleAuthProvider,
-createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth'
 
 import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'
 
@@ -12,7 +12,6 @@ const firebaseConfig = {
   messagingSenderId: "260894373838",
   appId: "1:260894373838:web:b726b329c1828668849d9f"
 };
-
 
 const firebaseApp = initializeApp(firebaseConfig);
 
@@ -72,3 +71,6 @@ export const signInUserWithEmailAndPassword = async (email, password) => {
 
 
 export const signOutUser = async() => await signOut(auth);
+
+//запускает колбек каждый раз когда менятеся состояние auth
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
